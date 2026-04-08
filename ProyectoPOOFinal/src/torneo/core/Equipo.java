@@ -6,7 +6,9 @@ public class Equipo {
     private String nombre;
     private List<Jugador> integrantes;
     private double mmrPromedio;
-    public static final int MAX_INTEGRANTES = 3;
+
+    // Constante para el límite de 3v3
+    public static final int MAX_JUGADORES = 3;
 
     public Equipo(String nombre) {
         this.nombre = nombre;
@@ -19,25 +21,37 @@ public class Equipo {
         }
     }
     public void inscribirJugador(Jugador j) throws EquipoLlenoException {
-        if (integrantes.size() >= MAX_INTEGRANTES) {
-            throw new EquipoLlenoException("El equipo " + nombre + " ya tiene 3 jugadores.");
+        if (integrantes.size() >= MAX_JUGADORES) {
+            throw new EquipoLlenoException("Error: El equipo '" + nombre + "' ya tiene 3 jugadores.");
         }
+
         integrantes.add(j);
-        actualizarMMR();
+        System.out.println("Jugador " + j.getNickname() + " unido a " + nombre);
+
+
+        calcularMMRPromedio();
     }
 
-    private void actualizarMMR() {
-        if (integrantes.isEmpty()) return;
+    private void calcularMMRPromedio() {
+        if (integrantes.isEmpty()) {
+            this.mmrPromedio = 0;
+            return;
+        }
 
         double suma = 0;
         for (Jugador j : integrantes) {
-
+            suma += j.getMmr();
         }
-
         this.mmrPromedio = suma / integrantes.size();
     }
 
-    public double getMmrPromedio() { return mmrPromedio; }
+
     public String getNombre() { return nombre; }
-    public List<Jugador> getIntegrantes() { return new ArrayList<>(integrantes); }
+    public double getMmrPromedio() { return mmrPromedio; }
+    public List<Jugador> getIntegrantes() { return integrantes; }
+
+    @Override
+    public String toString() {
+        return "Equipo: " + nombre + " | MMR Promedio: " + String.format("%.2f", mmrPromedio);
+    }
 }
