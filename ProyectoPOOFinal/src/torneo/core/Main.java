@@ -1,6 +1,5 @@
 package torneo.core;
 
-
 import java.util.Scanner;
 
 public class Main {
@@ -16,6 +15,7 @@ public class Main {
             BracketTorneo bracket = new BracketTorneo();
             bracket.construir(numEquipos);
             System.out.println("Árbol creado correctamente con " + numEquipos + " equipos");
+            bracket.imprimirBracket();
         }
     }
 }
