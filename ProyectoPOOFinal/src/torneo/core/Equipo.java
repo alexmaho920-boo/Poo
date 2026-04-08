@@ -7,7 +7,6 @@ public class Equipo {
     private List<Jugador> integrantes;
     private double mmrPromedio;
 
-    // Constante para el límite de 3v3
     public static final int MAX_JUGADORES = 3;
 
     public Equipo(String nombre) {
