@@ -1,12 +1,9 @@
 package torneo.core;
+
 public class Jugador {
     private String nickname;
     private int mmr;
-    public class JugadorInvalidoException extends RuntimeException {
-        public JugadorInvalidoException(String mensaje) {
-            super(mensaje);
-        }
-    }
+
     public Jugador(String nickname, int mmr) {
         if (mmr < 0) {
             throw new JugadorInvalidoException("El MMR no puede ser menor a 0.");

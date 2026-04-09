@@ -1,4 +1,5 @@
 package torneo.core;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,20 +15,13 @@ public class Equipo {
         this.integrantes = new ArrayList<>();
         this.mmrPromedio = 0.0;
     }
-    public class EquipoLlenoException extends Exception {
-        public EquipoLlenoException(String mensaje) {
-            super(mensaje);
-        }
-    }
+
     public void inscribirJugador(Jugador j) throws EquipoLlenoException {
         if (integrantes.size() >= MAX_JUGADORES) {
             throw new EquipoLlenoException("Error: El equipo '" + nombre + "' ya tiene 3 jugadores.");
         }
-
         integrantes.add(j);
         System.out.println("Jugador " + j.getNickname() + " unido a " + nombre);
-
-
         calcularMMRPromedio();
     }
 
@@ -36,14 +30,12 @@ public class Equipo {
             this.mmrPromedio = 0;
             return;
         }
-
         double suma = 0;
         for (Jugador j : integrantes) {
             suma += j.getMmr();
         }
         this.mmrPromedio = suma / integrantes.size();
     }
-
 
     public String getNombre() { return nombre; }
     public double getMmrPromedio() { return mmrPromedio; }
