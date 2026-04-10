@@ -33,18 +33,26 @@ public class BracketTorneo {
 
         while (!cola.isEmpty()) {
             int nodosPorNivel = cola.size();
-            System.out.print("Ronda " + ronda + ": ");
+            StringBuilder sb = new StringBuilder();
 
             for (int i = 0; i < nodosPorNivel; i++) {
                 NodoLlave nodo = cola.poll();
-                System.out.print("[?] vs [?]  ");
 
-                if (nodo.getIzquierda() != null) cola.add(nodo.getIzquierda());
-                if (nodo.getDerecha() != null) cola.add(nodo.getDerecha());
+                if (nodo.getIzquierda() != null && nodo.getDerecha() != null) {
+                    if (nodo.getEncuentro() != null) {
+                        sb.append(nodo.getEncuentro().toString() + "  ");
+                    } else {
+                        sb.append("[?] vs [?]  ");
+                    }
+                    cola.add(nodo.getIzquierda());
+                    cola.add(nodo.getDerecha());
+                }
             }
 
-            System.out.println();
-            ronda++;
+            if (sb.length() > 0) {
+                System.out.println("Ronda " + ronda + ": " + sb);
+                ronda++;
+            }
         }
     }
 
